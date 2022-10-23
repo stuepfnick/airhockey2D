@@ -14,7 +14,7 @@ public class AiMovement : MonoBehaviour
     private Vector2 _targetPos;
 
     private Vector2 _oldDirection;
-    private float _offsetX = 0f;
+    private float _offsetX;
 
     private bool _isTop;
 

@@ -30,28 +30,30 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Drag Event
-        // if (Input.GetMouseButton(0))
-        // {
-        var mousePos = GetMousePos();
-        if (_canMove)
-            _rb.MovePosition(mousePos);
-        //}
-        
         // Down Event
         if (Input.GetMouseButtonDown(0))
         {
-            //var mousePos = GetMousePos();
+            var mousePos = GetMousePos();
             _canMove = _collider.OverlapPoint(mousePos);
         }
-    }
-    
-    Vector2 GetMousePos()
-    {
-        var mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        var clampedMousePos = new Vector2(Mathf.Clamp(mousePos.x, _playerBoundary[0], _playerBoundary[1]),
-            Mathf.Clamp(mousePos.y, _playerBoundary[2], _playerBoundary[3]));
-        
-        return clampedMousePos;
+
+        // Drag Event
+        if (Input.GetMouseButton(0))
+        {
+            if (_canMove)
+            {
+                var mousePos = GetMousePos();
+                _rb.MovePosition(mousePos);
+            }
+        }
+
+        Vector2 GetMousePos()
+        {
+            var mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            var clampedMousePos = new Vector2(Mathf.Clamp(mousePos.x, _playerBoundary[0], _playerBoundary[1]),
+                Mathf.Clamp(mousePos.y, _playerBoundary[2], _playerBoundary[3]));
+
+            return clampedMousePos;
+        }
     }
 }
